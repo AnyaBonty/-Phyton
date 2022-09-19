@@ -1,0 +1,16 @@
+print("Напишите свое имя: ", end=' ')
+a=input()
+print("Напишите свой возраст: ",end=' ')
+b=int(input())
+print('Меня зовут',a,'. Мне',b, end=" ")
+f=list(a)
+k=('год.', 'года. ', 'лет.')
+if b%10==1 and b!=11:
+    print(k[0])
+elif 2<=(b%10) and (b%10)<=4 and (b<10 or b>20):
+    print(k[1])
+else:
+    print(k[2])
+print('Ваше имя по буквам: ', end=' ')
+for i in range(len(f)):
+    print(f[i],end=' ')
