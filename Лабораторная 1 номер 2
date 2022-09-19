@@ -1,0 +1,126 @@
+import math
+h=['сложение', 'вычитание', 'умножение', 'деление', 'возведение в степень', 'логарифм', 'округление в большую сторону до N знака после запятой', 'округление в меньшую сторону до N знака после запятой']
+k=['1','2','3','4','5','6','7','8']
+def f(n):
+    try:
+        float(n)
+        return True
+    except ValueError:
+        return False
+
+print('Список того, что я умею: ')
+for i in range(len(h)-1):
+    print(i+1, '-', h[i])
+print(len(h),'-', h[len(h)-1])
+print('Введите номер одной из перечисленных функции:', end=' ')
+a=input()
+while a not in k:
+    print('Вы ввели неверную функцию, введите функцию из предложенных:', end=' ')
+    a=input()
+if a==k[4]:
+    print('Введите число, которое нужно возвести в степень:', end=' ')
+    b=input()
+
+    while f(b)==False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        b=input()
+    print('Введите степень:', end=' ')
+    c=input()
+    while f(c)==False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        c=input()
+    print('Результат:', float(b)**float(c))
+elif a==k[5]:
+    print('Введите основание:', end=' ')
+    b = input()
+    while f(b) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        b = input()
+    print('Введите аргумент:', end=' ')
+    c = input()
+    while f(c) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        c = input()
+    print('Результат:',math.log(float(c),float(b)))
+elif a==k[6] or a==k[7]:
+    print('Введите число, которое нужно округлить:', end=' ')
+    b = input()
+    while f(b) == False:
+        print('Введенная строка не является десятичным числом, введите число:', end=' ')
+        b = input()
+    print('Введите, до какого знака после запятой:', end=' ')
+    c = input()
+    while c.isdigit() == False:
+        print('Введенная срока не является числом, введите число:', end=' ')
+        c = input()
+    o=0
+    for i in range(len(b)):
+        if b[i]=='.':
+            for j in range(i+1,len(b)):
+                o=o+1
+            break
+    if o==int(c):
+        print('Результат:',b)
+    elif o==0:
+        b=b+'.'
+        for i in range(0,(int(c)-o)):
+            b=b+'0'
+        print("Результат: ",b)
+    elif o<int(c) and o!=0:
+        for i in range(0,(int(c)-o)):
+            b=b+'0'
+        print("Результат: ",b)
+    else:
+        for i in range (o-int(c)):
+            b=b[:-1]
+        if a==k[6]:
+            p=int(b[-1])+1
+            b=b[:-1]
+            b=b+str(p)
+            print('Результат:', b)
+        else:
+            p = int(b[-1]) -1
+            b = b[:-1]
+            b = b + str(p)
+            print('Результат:', b)
+elif a==k[0] or a==k[2]:
+    print('Введите первое число:', end=' ')
+    b = input()
+    while f(b) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        b = input()
+    print('Введите степень:', end=' ')
+    c = input()
+    while f(c) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        c = input()
+    if a==k[0]:
+        print('Результат:', float(b) + float(c))
+    else:
+        print('Результат:', float(b) * float(c))
+elif a==k[1]:
+    print('Введите уменьшаемое:', end=' ')
+    b = input()
+    while f(b) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        b = input()
+    print('Введите вычитаемое:', end=' ')
+    c = input()
+    while f(c) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        c = input()
+
+    print('Результат:', float(b) - float(c))
+elif a==k[3]:
+    print('Введите делимое число:', end=' ')
+    b = input()
+    while f(b) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        b = input()
+    print('Введите делитель:', end=' ')
+    c = input()
+    while f(c) == False:
+        print('Введенная строка не является числом, введите число:', end=' ')
+        c = input()
+
+    print('Результат:', float(b) / float(c))
