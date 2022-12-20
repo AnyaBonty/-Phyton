@@ -1,0 +1,38 @@
+a = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+     [1, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+     [1, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+     [1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
+     [1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+     [1, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+     [0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+     [1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+     [1, 1, 1, 0, 0, 1, 0, 0, 0, 1],
+     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+start = 6, 0
+end = 1, 9
+p = []
+for i in range(len(a)):
+    p.append([])
+    for j in range(len(a[i])):
+        p[i].append(0)
+p[start[0]][start[1]] = 1
+
+def f(k):
+    for i in range(len(p)):
+        for j in range(len(p[i])):
+            if p[i][j] == k:
+                if i > 0 and (p[i - 1][j] == 0 or p[i - 1][j] > k) and a[i - 1][j] == 0:
+                    p[i - 1][j] = k + 1
+                if j > 0 and (p[i][j - 1] == 0 or p[i][j - 1] > k) and a[i][j - 1] == 0:
+                    p[i][j - 1] = k + 1
+                if i < len(p) - 1 and (p[i + 1][j] == 0 or p[i + 1][j] > k) and a[i + 1][j] == 0:
+                    p[i + 1][j] = k + 1
+                if j < len(p[i]) - 1 and (p[i][j + 1] == 0 or p[i][j + 1] > k) and a[i][j + 1] == 0:
+                    p[i][j + 1] = k + 1
+k = 0
+while p[end[0]][end[1]] == 0:
+    k += 1
+    f(k)
+print("На кратчайшем пути до выхода пришлось сделать", k, "шагов.")
+for i in p:
+    print(i)
